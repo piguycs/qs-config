@@ -44,11 +44,25 @@ Variants {
 
                     Item { Layout.fillWidth: true }
 
+                    BrightnessWidget {}
+
+                    Item { Layout.preferredWidth: 3 }
+
+                    VolumeWidget {}
+
+                    Item { Layout.preferredWidth: 3 }
+
                     Text {
-                        text: (Battery.charging ? "⚡ " : "🔋 ") + Battery.percentage + "%"
-                        color: Battery.critical ? "#FF5555" : "white"
+                        text: (Battery.charging ? "󰢟 " : "󰂎 ") + Battery.percentage + "%"
+                        color: Battery.critical ? "#FF5555" : "#C5C9C5"
+                        font.family: "Iosevka Nerd Font Propo"
+                        font.pointSize: 12
                         visible: Battery.available
                     }
+
+                    Item { Layout.preferredWidth: 3 }
+
+                    TimeWidget {}
                 }
             }
         }

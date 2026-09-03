@@ -1,0 +1,27 @@
+{
+    "wallpaper": "/home/kunal/Pictures/wallhaven-ly3gmr.png",
+    "alpha": "100",
+    "special": {
+        "background": "#08040C",
+        "foreground": "#A19FBF",
+        "cursor": "#A19FBF"
+    },
+    "colours": {
+        "colour0": "#08040C",
+        "colour1": "#8C485B",
+        "colour2": "#B34C50",
+        "colour3": "#D04F49",
+        "colour4": "#F85651",
+        "colour5": "#FF625A",
+        "colour6": "#F8596A",
+        "colour7": "#A19FBF",
+        "colour8": "#706f85",
+        "colour9": "#8C485B",
+        "colour10": "#B34C50",
+        "colour11": "#D04F49",
+        "colour12": "#F85651",
+        "colour13": "#FF625A",
+        "colour14": "#F8596A",
+        "colour15": "#A19FBF"
+    }
+}
