@@ -10,15 +10,18 @@ Singleton {
 
     property bool available: false
     property int percentage: 0
+    property string device: ""
 
     Process {
         id: query
         command: ["brightnessctl", "-m"]
         stdout: StdioCollector {
             onStreamFinished: {
-                const percent = text.trim().split(",").find(field => field.endsWith("%"));
+                const fields = text.trim().split(",");
+                const percent = fields.find(field => field.endsWith("%"));
                 const value = parseInt(percent, 10);
                 if (!isNaN(value)) {
+                    root.device = fields[0];
                     root.percentage = value;
                     root.available = true;
                 }
@@ -27,16 +30,30 @@ Singleton {
     }
 
     Process {
+        id: watch
+        command: ["inotifywait", "-m", "-q", "-e", "modify", "/sys/class/backlight/" + root.device + "/brightness"]
+        running: root.device !== ""
+        stdout: SplitParser {
+            onRead: root.refresh()
+        }
+    }
+
+    Process {
         id: adjust
-        onExited: query.running = true
+        onExited: root.refresh()
     }
 
     Timer {
-        interval: 1000
+        interval: 5000
         running: true
         repeat: true
         triggeredOnStart: true
-        onTriggered: query.running = true
+        onTriggered: root.refresh()
+    }
+
+    function refresh() {
+        if (!query.running)
+            query.running = true;
     }
 
     function adjustBrightness(delta: int) {
